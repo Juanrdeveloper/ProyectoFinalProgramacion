@@ -8,31 +8,26 @@ public class Venta {
     private List<Producto> productosVendidos;
     private double total;
     private String fechaHora;
+    private Cliente cliente;
 
-    public Venta(int idVenta, String fechaHora) {
+    public Venta(int idVenta, Cliente cliente) {
         this.idVenta = idVenta;
+        this.cliente = cliente;
         this.productosVendidos = new ArrayList<>();
-        this.fechaHora = fechaHora;
         this.total = 0;
+        this.fechaHora = java.time.LocalDateTime.now().toString();
     }
 
-    public void agregarProducto(Producto producto) {
-        productosVendidos.add(producto);
-        total += producto.getPrecio();
+    public void agregarProducto(Producto producto, int cantidad) {
+        for (int i = 0; i < cantidad; i++) {
+            this.productosVendidos.add(producto);
+        }
+        this.total += producto.getPrecio() * cantidad;
+        cliente.agregarPuntos((int) (producto.getPrecio() * cantidad)); // Ejemplo: 1 punto por cada dólar
     }
 
-    public double calcularTotal() {
-        return total;
-    }
-
-    @Override
-    public String toString() {
-        return "Venta{" +
-                "idVenta=" + idVenta +
-                ", productosVendidos=" + productosVendidos +
-                ", total=" + total +
-                ", fechaHora='" + fechaHora + '\'' +
-                '}';
-    }
+    // Otros métodos
 }
+
+
 

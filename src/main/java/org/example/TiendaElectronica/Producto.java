@@ -1,48 +1,38 @@
 package org.example.TiendaElectronica;
 
+import com.github.javafaker.Faker;
+
 public class Producto {
-    private int id;
     private String nombre;
-    private String descripcion;
     private double precio;
     private int cantidadEnStock;
 
-    public Producto(int id, String nombre, String descripcion, double precio, int cantidadEnStock) {
-        this.id = id;
+    public Producto(String nombre, double precio, int cantidadEnStock) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
         this.cantidadEnStock = cantidadEnStock;
-    }
-
-    // Getters y Setters
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public int getCantidadEnStock() {
-        return cantidadEnStock;
-    }
-
-    public void actualizarCantidadEnStock(int cantidad) {
-        this.cantidadEnStock += cantidad;
     }
 
     @Override
     public String toString() {
         return "Producto{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
+                "nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", cantidadEnStock=" + cantidadEnStock +
                 '}';
     }
+
+    public static Producto[] generarProductos(int cantidad) {
+        Faker faker = new Faker();
+        Producto[] productos = new Producto[cantidad];
+        for (int i = 0; i < cantidad; i++) {
+            String nombre = faker.commerce().productName();
+            double precio = Double.parseDouble(faker.commerce().price(10.0, 1000.0));
+            int cantidadEnStock = faker.number().numberBetween(1, 100);
+            productos[i] = new Producto(nombre, precio, cantidadEnStock);
+        }
+        return productos;
+    }
 }
+
+

@@ -11,3 +11,4 @@ public class Proveedor {
     // Getters y Setters
     // Métodos para agregar, modificar y eliminar productos
 }
+

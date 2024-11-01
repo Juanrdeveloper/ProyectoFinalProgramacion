@@ -1,26 +1,37 @@
 package org.example.TiendaElectronica;
 
+import com.github.javafaker.Faker;
+
 public class Usuario {
     private String nombreUsuario;
-    private String contrasena;
-    private String rol;
+    private String correo;
+    private String direccion;
 
-    public Usuario(String nombreUsuario, String contrasena, String rol) {
+    public Usuario(String nombreUsuario, String correo, String direccion) {
         this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.rol = rol;
+        this.correo = correo;
+        this.direccion = direccion;
     }
 
-    // Getters y Setters
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombreUsuario='" + nombreUsuario + '\'' +
+                ", correo='" + correo + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public boolean verificarContrasena(String contrasena) {
-        return this.contrasena.equals(contrasena);
+    public static Usuario[] generarUsuarios(int cantidad) {
+        Faker faker = new Faker();
+        Usuario[] usuarios = new Usuario[cantidad];
+        for (int i = 0; i < cantidad; i++) {
+            usuarios[i] = new Usuario(faker.name().username(),
+                    faker.internet().emailAddress(),
+                    faker.address().fullAddress());
+        }
+        return usuarios;
     }
 }
+
+

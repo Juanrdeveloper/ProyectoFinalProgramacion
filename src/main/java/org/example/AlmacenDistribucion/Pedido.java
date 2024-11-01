@@ -1,23 +1,23 @@
 package org.example.AlmacenDistribucion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-    private int idDePedido;
+    private int idPedido;
     private List<Producto> productosSolicitados;
-    private String estado; // Puede ser "pendiente", "enviado", "entregado"
-    private String fechaYHora;
+    private String estado; // (pendiente, enviado, entregado)
+    private String fechaHora;
 
-    // Constructor
-    public Pedido(int idDePedido, String fechaYHora) {
-        this.idDePedido = idDePedido;
-        this.productosSolicitados = new ArrayList<>();
-        this.estado = "pendiente";
-        this.fechaYHora = fechaYHora;
-    }
+    // Getters y Setters
+    public int getIdPedido() { return idPedido; }
+    public void setIdPedido(int idPedido) { this.idPedido = idPedido; }
+    public List<Producto> getProductosSolicitados() { return productosSolicitados; }
+    public void setProductosSolicitados(List<Producto> productosSolicitados) { this.productosSolicitados = productosSolicitados; }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
+    public String getFechaHora() { return fechaHora; }
+    public void setFechaHora(String fechaHora) { this.fechaHora = fechaHora; }
 
-    // Métodos
     public void agregarProducto(Producto producto) {
         this.productosSolicitados.add(producto);
     }
@@ -25,13 +25,7 @@ public class Pedido {
     public void cambiarEstado(String nuevoEstado) {
         this.estado = nuevoEstado;
     }
-
-    public List<Producto> getProductosSolicitados() {
-        return productosSolicitados;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
 }
+
+
 

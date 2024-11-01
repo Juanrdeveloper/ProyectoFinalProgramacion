@@ -1,55 +1,40 @@
 package org.example.AlmacenDistribucion;
 
+import com.github.javafaker.Faker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Random;
+
 public class Producto {
-    private int id;
-    private String nombre;
-    private String descripcion;
+    private static final Logger logger = LogManager.getLogger(Producto.class);
+    private String nombreProducto;
     private double precio;
-    private int cantidadEnStock;
+    private int cantidadStock;
 
     // Constructor
-    public Producto(int id, String nombre, String descripcion, double precio, int cantidadEnStock) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+    public Producto(String nombreProducto, double precio, int cantidadStock) {
+        this.nombreProducto = nombreProducto;
         this.precio = precio;
-        this.cantidadEnStock = cantidadEnStock;
+        this.cantidadStock = cantidadStock;
     }
 
-    // Getters y Setters
-    public int getId() {
-        return id;
-    }
+    // Getters
+    public String getNombreProducto() { return nombreProducto; }
+    public double getPrecio() { return precio; }
+    public int getCantidadStock() { return cantidadStock; }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidadEnStock() {
-        return cantidadEnStock;
-    }
-
-    public void actualizarCantidad(int cantidad) {
-        this.cantidadEnStock += cantidad;
+    // Método para crear productos
+    public static Producto crearProducto() {
+        Faker faker = new Faker();
+        Random random = new Random();
+        String nombre = faker.commerce().productName();
+        double precio = 10 + (100 - 10) * random.nextDouble(); // Precio entre 10 y 100
+        int cantidadStock = random.nextInt(100); // Cantidad entre 0 y 99
+        Producto producto = new Producto(nombre, precio, cantidadStock);
+        logger.info("Producto creado: " + producto.getNombreProducto() + " a $" + producto.getPrecio());
+        return producto;
     }
 }
+
+
